@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../core/dist/c-gantt-core_svg.min.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="bg-filter"></div>
+  <form action="" class="task-form">
+    <h1>Edit Task</h1>
+    <p>Name: <input type="text" size="40"></p>
+    <p>Start date: <input type="date"></p>
+    <p>End date: <input type="date"></p>
+    <p>
+      Status:
+      <select>
+        <option value="0">Active</option>
+        <option value="1">Pending</option>
+        <option value="2">Inactive</option>
+        <option value="3">Done</option>
+      </select>
+    </p>
+    <div class="button-group">
+      <button type="button" class="button button__submit">Edit</button>
+      <button type="button" class="button button__cancel">Cancel</button>
+    </div>
+  </form>
+
+  <div id="svg"></div>
+
+  <button type="button" class="add-task">Add Task</button>
+
+  <script src="./dist/build.js"></script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 import classList from "classlist-polyfill";
 import remove from "element-remove";
 import findIndex from "array-findindex-polyfill";
+import dateFormat from "dateformat";
 
-// import style from "./main.scss";
+// import style from "./svg.scss";
+// import style from "./flex.scss";
 
 export default class C_Gantt {
   constructor(preSetup) {
@@ -13,8 +15,15 @@ export default class C_Gantt {
     this.CELL_WIDTH = preSetup.cellWidth || 90;
     this.HEADER_COLUMN_WIDTH = preSetup.headerWidth || 400;
     this.HEADER_ROW_HEIGHT = preSetup.headerHeight || 50;
+    this.layout = preSetup.layout || "svg";
     this.container = preSetup.container || document.body;
     this.selectTask = preSetup.selectTask;
+    this.common_class = preSetup.common_class || "";
+    this.right_side_class = preSetup.right_side_class || "";
+    this.left_side_class = preSetup.left_side_class || "";
+    this.row_class = preSetup.row_class || "";
+    this.cell_class = preSetup.cell_class || "";
+    this.date_format = preSetup.date_format || "mm/dd/yyyy";
   }
 
   svg_spec = "http://www.w3.org/2000/svg";
@@ -28,6 +37,20 @@ export default class C_Gantt {
     this.firstDayOffs = this.getFirstDayOffs();
     this.n_tasks = this.tasks.length;
 
+    if (this.layout == "svg") {
+      this.drawSvgGantt();
+    } else if (this.layout == "flex") {
+      this.drawFlexGantt();
+    }
+
+    this.container.appendChild(this.main);
+  }
+
+  /**
+   * Draw the Gantt chart in SVG layout
+   */
+
+  drawSvgGantt() {
     this.createSVGContainer();
     this.drawTopLeftCorner();
     this.drawHeaderRow();
@@ -37,8 +60,15 @@ export default class C_Gantt {
     this.addRowLabels();
     this.drawTasks();
     this.addSelectTaskHandler();
-
-    this.container.appendChild(this.main);
+  }
+  
+  /**
+   * Draw the Gantt chart in Flex Layout
+   */
+  drawFlexGantt() {
+    this.createFlexContainer();
+    this.createThead();
+    this.createTbody();
   }
 
   /**
@@ -58,7 +88,7 @@ export default class C_Gantt {
   }
 
   /**
-   * Draw top-left empty cell 
+   * Draw top-left empty cell
    */
   drawTopLeftCorner() {
     let corner = document.createElementNS(this.svg_spec, "rect");
@@ -124,6 +154,7 @@ export default class C_Gantt {
           `${this.HEADER_ROW_HEIGHT + this.CELL_HEIGHT * row}`
         );
         cell.classList.add("c-gantt__cell");
+        cell.classList.add(this.cell_class);
 
         // Check day-offs
         for (let i = 0; i < this.dayOffs.length; i++) {
@@ -141,12 +172,10 @@ export default class C_Gantt {
    * Add labels to the columns
    */
   addColumnLabels() {
-    let formatter = new Intl.DateTimeFormat("en-US");
-
     for (let i = 0; i < this.n_days; i++) {
       let label = document.createElementNS(this.svg_spec, "text");
       let cur_date = this.dates[i];
-      let text = document.createTextNode(formatter.format(cur_date));
+      let text = document.createTextNode(dateFormat(cur_date, this.date_format));
       label.appendChild(text);
       label.setAttribute(
         "x",
@@ -231,10 +260,18 @@ export default class C_Gantt {
     }
   }
 
+  /**
+   * 
+   * @param {function} func Add click handler on the chart 
+   */
   addSelectTaskHandler(func) {
-    this.main.addEventListener('click', (event) => this.selectTask(event, this));
+    this.main.addEventListener("click", event => this.selectTask(event, this));
   }
 
+  /**
+   * 
+   * @param {object} task Update the task or add new task if it doesn't exist
+   */
   updateTask(task) {
     let cur_task_index = this.tasks.findIndex((elem, i) => {
       return elem.id === task.id;
@@ -244,6 +281,96 @@ export default class C_Gantt {
     } else {
       this.tasks[cur_task_index] = task;
     }
+  }
+
+  /**
+   * Create flex container
+   */
+  createFlexContainer() {
+    this.main = document.createElement("div");
+    this.main.classList.add("c-gantt");
+    this.main.classList.add(this.common_class);
+  }
+
+  /**
+   * Create the left part of the chart
+   */
+  createThead() {
+    let thead = document.createElement("div");
+    thead.classList.add("c-gantt__thead");
+    thead.classList.add(this.left_side_class);
+
+    for (let i = 0; i < this.n_tasks + 1; i++) {
+      let row_header = document.createElement("div");
+      row_header.classList.add("c-gantt__row-header");
+      if (!i) row_header.classList.add("c-gantt__top-left");
+
+      let text = i ? this.tasks[i - 1].name : "";
+      let text_node = document.createTextNode(text);
+
+      row_header.appendChild(text_node);
+      thead.appendChild(row_header);
+    }
+
+    this.main.appendChild(thead);
+  }
+
+  /**
+   * create the right part of the chart
+   */
+  createTbody() {
+    let tbody = document.createElement("div");
+    tbody.classList.add("c-gantt__tbody");
+    tbody.classList.add(this.right_side_class);
+
+    for (let i = 0; i < this.n_tasks + 1; i++) {
+      let row = document.createElement("div");
+      row.classList.add("c-gantt__row");
+      row.classList.add(this.row_class);
+
+      let min_date;
+      let task;
+      let start_date;
+      let end_date;
+      let duration;
+      let column;
+
+      if (!i) {
+        row.classList.add("c-gantt__headers-row");
+      } else {
+        min_date = this.getMinimumDate(this.tasks);
+        task = this.tasks[i - 1];
+        start_date = new Date(task.start_date);
+        end_date = new Date(task.end_date);
+        duration = (end_date - start_date) / 1000 / 60 / 60 / 24 + 1;
+        column = (start_date - min_date) / 1000 / 60 / 60 / 24;
+      }
+
+      for (let j = 0; j < this.n_days; j++) {
+        let cell = document.createElement("div");
+
+        cell.classList.add("c-gantt__cell");
+        cell.classList.add(this.cell_class);
+        if (!i) {
+          cell.classList.add("c-gantt__column-header");
+
+          let text = dateFormat(this.dates[j], this.date_format);
+          let text_node = document.createTextNode(text);
+          cell.appendChild(text_node);
+        } else if (this.firstDayOffs.indexOf(j % 7) != -1) {
+          cell.classList.add("c-gantt__dayOff");
+        } else if (j >= column && j < column + duration) {
+          cell.classList.add("c-gantt__task");
+          cell.classList.add("c-gantt__task__" + this.statuses[task.status]);
+        }
+
+        row.appendChild(cell);
+      }
+
+      tbody.appendChild(row);
+    }
+
+    this.main.appendChild(tbody);
   }
 
   /**
@@ -308,7 +435,7 @@ export default class C_Gantt {
 
   /**
    * Get the next day of a given day
-   * @param {date} day A day to get the next day 
+   * @param {date} day A day to get the next day
    */
   getNextDay(day) {
     let next_day = new Date(
@@ -318,4 +445,4 @@ export default class C_Gantt {
     );
     return next_day;
   }
-};
+}

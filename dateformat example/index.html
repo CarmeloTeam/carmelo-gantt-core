@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../core/dist/c-gantt-core_svg.min.css">
+  <script src="../core/dist/c-gantt-core.bundle.min.js"></script>
+</head>
+
+<body>
+
+  <script>
+    const C_Gantt = carmelo.C_Gantt;
+
+    const tasks = [
+      {
+        id: 1,
+        name: 'Hiring an event organizer',
+        start_date: '2016-02-28',
+        end_date: '2016-03-01',
+        status: 2
+      },
+      {
+        id: 2,
+        name: 'The choice of design',
+        start_date: '2016-03-01',
+        end_date: '2016-03-03',
+        status: 3
+      },
+      {
+        id: 3,
+        name: 'Hiring a publicist',
+        start_date: '2016-03-04',
+        end_date: '2016-03-04',
+        status: 1
+      },
+      {
+        id: 4,
+        name: 'Hiring a designer',
+        start_date: '2016-03-05',
+        end_date: '2016-03-06',
+        status: 0
+      }
+    ];
+
+    const statuses = {
+      0: "active",
+      1: "pending",
+      2: "inactive",
+      3: "done"
+    };
+
+    const container = document.querySelector("#svg");
+
+    let editTaskHandler = () => {
+      console.log("click");
+    }
+
+    const ganttPresetup = {
+      items: tasks,
+      statuses: statuses,
+      dayOffs: [0],
+      headerWidth: 400,
+      headerHeight: 50,
+      cellHeight: 30,
+      cellWidth: 90,
+      container: container,
+      selectTask: editTaskHandler,
+      layout: 'svg',
+      common_class: 'common_class',
+      left_side_class: 'left_side',
+      right_side_class: 'right_side',
+      row_class: 'row',
+      cell_class: 'cell',
+      date_format: 'dd/mm/yyyy'
+    }
+
+    let gantt = new C_Gantt(ganttPresetup);
+    gantt.draw();
+
+  </script>
+
+</body>
+
+</html>

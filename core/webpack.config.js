@@ -5,8 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: './index.js',
   output: {
-    filename: 'c-gantt-core.bundle.min.js',
-    library: 'C_Gantt'
+    filename: 'c-gantt-core.bundle.js',
+    library: 'carmelo'
   },
 
   watch: true,
@@ -15,7 +15,7 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'c-gantt-core.min.css',
+      filename: 'c-gantt-core_svg.css',
     }),
   ],
 
@@ -37,9 +37,9 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
+            // options: {
+            //   hmr: process.env.NODE_ENV === 'development',
+            // },
           },
           'css-loader',
           'sass-loader',
@@ -48,5 +48,5 @@ module.exports = {
     ]
   },
 
-  mode: 'production',
+  mode: 'development',
 }
