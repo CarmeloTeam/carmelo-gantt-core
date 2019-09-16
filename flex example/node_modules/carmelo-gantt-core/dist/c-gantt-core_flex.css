@@ -1,0 +1,44 @@
+.c-gantt {
+  display: flex; }
+  .c-gantt .c-gantt__tbody {
+    overflow-x: auto; }
+  .c-gantt .c-gantt__row {
+    display: flex;
+    flex: 0 0 auto; }
+  .c-gantt .c-gantt__row-header {
+    width: 500px;
+    height: 40px;
+    line-height: 40px; }
+  .c-gantt .c-gantt__cell {
+    flex: 0 0 auto;
+    width: 150px;
+    height: 40px;
+    background-color: white; }
+  .c-gantt .c-gantt__column-header, .c-gantt .c-gantt__thead {
+    font-weight: bold;
+    text-align: center;
+    background-color: blue;
+    vertical-align: center;
+    color: white;
+    font-family: "Times New Roman";
+    font-size: 18px; }
+  .c-gantt .c-gantt__top-left {
+    height: 70px; }
+  .c-gantt .c-gantt__column-header {
+    line-height: 70px;
+    height: 70px; }
+  .c-gantt .c-gantt__row-header, .c-gantt .c-gantt__cell {
+    border: 1px solid lightblue; }
+  .c-gantt .c-gantt__dayOff {
+    background-color: lightblue; }
+  .c-gantt .c-gantt__task__active {
+    background-color: blue; }
+  .c-gantt .c-gantt__task__inactive {
+    background-color: red; }
+  .c-gantt .c-gantt__task__pending {
+    background-color: yellow; }
+  .c-gantt .c-gantt__task__done {
+    background-color: green; }
+  .c-gantt .c-gantt__thead {
+    margin-bottom: 17px; }
+

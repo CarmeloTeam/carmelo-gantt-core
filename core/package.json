@@ -1,6 +1,6 @@
 {
   "name": "carmelo-gantt-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Carmelo Gantt Chart",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,6 @@
   "dependencies": {
     "array-findindex-polyfill": "^0.1.0",
     "classlist-polyfill": "^1.2.0",
-    "dateformat": "^3.0.3",
     "element-remove": "^1.0.4"
   }
 }

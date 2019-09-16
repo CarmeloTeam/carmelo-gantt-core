@@ -15,5 +15,7 @@
     "babel-loader": "^8.0.6",
     "webpack": "^4.39.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "carmelo-gantt-core": "^1.0.1"
+  }
 }

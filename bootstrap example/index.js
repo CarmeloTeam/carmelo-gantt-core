@@ -1,4 +1,4 @@
-import C_Gantt from "../core/index";
+import C_Gantt from "carmelo-gantt-core/index";
 
 require("./node_modules/bootstrap/dist/css/bootstrap.min.css");
 require("./node_modules/bootstrap/dist/js/bootstrap.bundle");

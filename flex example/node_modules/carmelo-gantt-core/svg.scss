@@ -1,0 +1,73 @@
+$primary-color: blue !default;
+$secondary-color: lightblue !default;
+$bg-color: white !default;
+
+$tasks_active-color: blue !default;
+$tasks_inactive-color: red !default;
+$tasks_pending-color: yellow !default;
+$tasks_done-color: green !default;
+
+$font_color: white !default;
+$font_size: 14px !default;
+$font_family: 'Times New Roman' !default;
+$font_style: bold !default;
+
+.c-gantt {
+  .c-gantt__top-left,
+  .c-gantt__task-header,
+  .c-gantt__date-header {
+    fill: $primary-color;
+    stroke: $secondary-color;
+  }
+
+  .c-gantt__cell {
+    fill: $bg-color;
+    stroke: $secondary-color;
+  }
+
+  .c-gantt__cell__day-off {
+    fill: $secondary-color;
+  }
+
+  .c-gantt__day-off {
+    fill: $secondary-color;
+    stroke: $secondary-color;
+  }
+
+  .c-gantt__working-day {
+    fill: $bg-color;
+    stroke: $secondary-color;
+  }
+
+  .c-gantt__dates,
+  .c-gantt__tasks {
+    fill: $bg-color;
+  }
+
+  .c-gantt__v-line,
+  .c-gantt__h-line {
+    stroke: $secondary-color;
+  }
+
+  .c-gantt__task__active {
+    fill: $tasks_active-color;
+  }
+
+  .c-gantt__task__pending {
+    fill: $tasks_pending-color;
+  }
+
+  .c-gantt__task__done {
+    fill: $tasks_done-color;
+  }
+
+  .c-gantt__task__inactive {
+    fill: $tasks_inactive-color;
+  }
+
+  .c-gantt__dates,
+  .c-gantt__tasks {
+    font: $font_style $font_size $font_family;
+    fill: $font_color; 
+  }
+}

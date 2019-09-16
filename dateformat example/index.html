@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link rel="stylesheet" href="../core/dist/c-gantt-core_svg.min.css">
-  <script src="../core/dist/c-gantt-core.bundle.min.js"></script>
+  <link rel="stylesheet" href="./node_modules/carmelo-gantt-core/dist/c-gantt-core_svg.min.css">
+  <script src="./node_modules/carmelo-gantt-core/dist/c-gantt-core.bundle.min.js"></script>
 </head>
 
 <body>
@@ -19,29 +19,29 @@
       {
         id: 1,
         name: 'Hiring an event organizer',
-        start_date: '2016-02-28',
-        end_date: '2016-03-01',
+        start_date: 'Friday, 28 February 2016',
+        end_date: 'Saturday, 01 March 2016',
         status: 2
       },
       {
         id: 2,
         name: 'The choice of design',
-        start_date: '2016-03-01',
-        end_date: '2016-03-03',
+        start_date: 'Wednesday, 01 March 2016',
+        end_date: 'Sunday, 03 March 2016',
         status: 3
       },
       {
         id: 3,
         name: 'Hiring a publicist',
-        start_date: '2016-03-04',
-        end_date: '2016-03-04',
+        start_date: 'Monday, 04 March 2016',
+        end_date: 'Tuesday, 04 March 2016',
         status: 1
       },
       {
         id: 4,
         name: 'Hiring a designer',
-        start_date: '2016-03-05',
-        end_date: '2016-03-06',
+        start_date: 'Thursday, 05 March 2016',
+        end_date: 'Friday, 06 March 2016',
         status: 0
       }
     ];
@@ -75,7 +75,8 @@
       right_side_class: 'right_side',
       row_class: 'row',
       cell_class: 'cell',
-      date_format: 'dd/mm/yyyy'
+      input_date_format: 'dddd, dd MMMM yyyy',
+      output_date_format: 'MMMM dd'
     }
 
     let gantt = new C_Gantt(ganttPresetup);

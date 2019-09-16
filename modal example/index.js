@@ -1,4 +1,4 @@
-import C_Gantt from "../core/index";
+import C_Gantt from "carmelo-gantt-core/index";
 
 const tasks = [
   {

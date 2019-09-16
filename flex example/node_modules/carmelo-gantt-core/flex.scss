@@ -1,0 +1,91 @@
+$primary-color: blue !default;
+$secondary-color: lightblue !default;
+$bg-color: white !default;
+
+$header-row-height: 70px !default;
+$header-column-width: 500px !default;
+$cell-width: 150px !default;
+$cell-height: 40px !default;
+
+$tasks_active-color: blue !default;
+$tasks_inactive-color: red !default;
+$tasks_pending-color: yellow !default;
+$tasks_done-color: green !default;
+
+$font_color: white !default;
+$font_size: 18px !default;
+$font_family: 'Times New Roman' !default;
+$font_style: bold !default;
+
+.c-gantt {
+  display: flex;
+  
+  .c-gantt__tbody {
+    overflow-x: auto;
+  }
+  
+  .c-gantt__row {
+    display: flex;
+    flex: 0 0 auto;
+  }
+  
+  .c-gantt__row-header {
+    width: $header-column-width;
+    height: $cell-height;
+    line-height: $cell-height;
+  }
+  
+  .c-gantt__cell {
+    flex: 0 0 auto;
+    width: $cell-width;
+    height: $cell-height;
+    background-color: $bg-color;
+  }
+  
+  .c-gantt__column-header, .c-gantt__thead {
+    font-weight: $font_style;
+    text-align: center;
+    background-color: $primary-color;
+    vertical-align: center;
+    color: $font_color;
+    font-family: $font_family;
+    font-size: $font_size;
+  }
+  
+  .c-gantt__top-left {
+    height: $header-row-height;
+  }
+  
+  .c-gantt__column-header {
+    line-height: $header-row-height;
+    height: $header-row-height;
+  }
+  
+  .c-gantt__row-header, .c-gantt__cell {
+    border: 1px solid $secondary-color;
+  }
+  
+  .c-gantt__dayOff {
+    background-color: $secondary-color;
+  }
+  
+  .c-gantt__task__active {
+    background-color: $tasks_active-color;
+  }
+  
+  .c-gantt__task__inactive {
+    background-color: $tasks_inactive-color;
+  }
+  
+  .c-gantt__task__pending {
+    background-color: $tasks_pending-color;
+  }
+  
+  .c-gantt__task__done {
+    background-color: $tasks_done-color;
+  }
+  
+  .c-gantt__thead {
+    margin-bottom: 17px;
+  }
+}

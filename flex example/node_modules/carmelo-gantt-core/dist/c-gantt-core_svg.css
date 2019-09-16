@@ -1,0 +1,46 @@
+.c-gantt .c-gantt__top-left,
+.c-gantt .c-gantt__task-header,
+.c-gantt .c-gantt__date-header {
+  fill: blue;
+  stroke: lightblue; }
+
+.c-gantt .c-gantt__cell {
+  fill: white;
+  stroke: lightblue; }
+
+.c-gantt .c-gantt__cell__day-off {
+  fill: lightblue; }
+
+.c-gantt .c-gantt__day-off {
+  fill: lightblue;
+  stroke: lightblue; }
+
+.c-gantt .c-gantt__working-day {
+  fill: white;
+  stroke: lightblue; }
+
+.c-gantt .c-gantt__dates,
+.c-gantt .c-gantt__tasks {
+  fill: white; }
+
+.c-gantt .c-gantt__v-line,
+.c-gantt .c-gantt__h-line {
+  stroke: lightblue; }
+
+.c-gantt .c-gantt__task__active {
+  fill: blue; }
+
+.c-gantt .c-gantt__task__pending {
+  fill: yellow; }
+
+.c-gantt .c-gantt__task__done {
+  fill: green; }
+
+.c-gantt .c-gantt__task__inactive {
+  fill: red; }
+
+.c-gantt .c-gantt__dates,
+.c-gantt .c-gantt__tasks {
+  font: bold 14px "Times New Roman";
+  fill: white; }
+
